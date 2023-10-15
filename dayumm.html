@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Your Website Title</title>
+
+<!-- New way to log into sequta without ashton stealing your password!! -->
+
+
+</head>
+
+<body>
+  <form action="process_form.php" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="message">Message:</label>
+    <textarea id="message" name="message" required></textarea>
+
+    <input type="submit" value="Submit">
+</form>
+
+
+
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $message = $_POST["message"];
+
+    $to = "your@email.com"; // Your email address
+    $subject = "New Contact Form Submission";
+    $headers = "From: $email";
+
+    mail($to, $subject, $message, $headers);
+
+    // Redirect the user to a "Thank You" page or display a success message
+    header("Location: thank_you.html");
+}
+?>
+</body>
